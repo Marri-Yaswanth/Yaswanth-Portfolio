@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
             href="#home" 
             className="text-xl font-bold text-gray-800 dark:text-white transition-colors"
           >
-            Y<span className="text-teal-500">aswanth</span>
+            Yaswanth.<span className="text-teal-500">Dev</span>
           </a>
 
           <div className="hidden md:flex items-center space-x-8">
