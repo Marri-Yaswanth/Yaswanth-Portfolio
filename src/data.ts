@@ -30,7 +30,7 @@ When I'm not coding, you'll find me learning new tech stacks, brainstorming pers
 When I'm not coding, you can find me exploring the outdoors, reading about new technologies, or participating in hackathons to challenge myself and collaborate with other talented developers.`,
   photoUrl: '/portfolio-picture.jpeg',
   resumeLinks: {
-    general: '/cv/general-resume.pdf',
+    general: '/cv/Yaswanth_updated_cv.pdf',
     specialized: '/cv/specialized-resume.pdf'
   }
 };
