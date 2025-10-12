@@ -1,0 +1,118 @@
+<!-- EMAILJS TEMPLATE - COPY THIS ENTIRE CODE -->
+<!-- Use this in your EmailJS Template Content Editor -->
+
+<div style="font-family: system-ui, -apple-system, sans-serif; font-size: 14px; max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 20px;">
+  
+  <!-- Header -->
+  <div style="background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); padding: 30px 20px; border-radius: 10px 10px 0 0; text-align: center;">
+    <h1 style="color: white; margin: 0; font-size: 24px; font-weight: bold;">📧 New Portfolio Message</h1>
+    <p style="color: #e0f2f1; margin: 10px 0 0 0; font-size: 14px;">Someone contacted you via your portfolio!</p>
+  </div>
+
+  <!-- Main Content -->
+  <div style="background-color: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    
+    <!-- Alert Message -->
+    <div style="background-color: #ecfdf5; border-left: 4px solid #14b8a6; padding: 15px; margin-bottom: 25px; border-radius: 5px;">
+      <p style="margin: 0; color: #0f766e; font-size: 14px;">
+        <strong>Action Required:</strong> A message from <strong>{{from_name}}</strong> has been received. Kindly respond at your earliest convenience.
+      </p>
+    </div>
+
+    <!-- Message Card -->
+    <div style="border: 1px dashed #d1d5db; padding: 20px; margin: 20px 0; border-radius: 8px; background-color: #fafafa;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="vertical-align: top; width: 60px;">
+            <div style="padding: 10px 12px; background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%); border-radius: 8px; font-size: 28px; text-align: center;" role="img">
+              👤
+            </div>
+          </td>
+          <td style="vertical-align: top; padding-left: 15px;">
+            <div style="margin-bottom: 15px;">
+              <div style="color: #1f2937; font-size: 18px; font-weight: bold; margin-bottom: 5px;">
+                {{from_name}}
+              </div>
+              <div style="color: #6b7280; font-size: 13px; margin-bottom: 8px;">
+                <strong>Email:</strong> 
+                <a href="mailto:{{from_email}}" style="color: #14b8a6; text-decoration: none;">{{from_email}}</a>
+              </div>
+              <div style="color: #6b7280; font-size: 13px;">
+                <strong>Subject:</strong> {{subject}}
+              </div>
+            </div>
+            
+            <!-- Message Content -->
+            <div style="background-color: white; padding: 15px; border-radius: 6px; border: 1px solid #e5e7eb; margin-top: 15px;">
+              <div style="color: #6b7280; font-size: 12px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.5px;">
+                Message:
+              </div>
+              <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0; white-space: pre-wrap;">{{message}}</p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Reply Button -->
+    <div style="text-align: center; margin: 30px 0 20px 0;">
+      <a href="mailto:{{from_email}}?subject=Re: {{subject}}" 
+         style="display: inline-block; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px; box-shadow: 0 2px 4px rgba(20, 184, 166, 0.3);">
+        📧 Reply to {{from_name}}
+      </a>
+    </div>
+
+    <!-- Quick Info -->
+    <div style="background-color: #f3f4f6; padding: 15px; border-radius: 6px; margin-top: 20px;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 5px 0; color: #6b7280; font-size: 13px;">
+            <strong>📅 Received:</strong>
+          </td>
+          <td style="padding: 5px 0; color: #374151; font-size: 13px; text-align: right;">
+            Just now
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0; color: #6b7280; font-size: 13px;">
+            <strong>📍 Source:</strong>
+          </td>
+          <td style="padding: 5px 0; color: #374151; font-size: 13px; text-align: right;">
+            Portfolio Contact Form
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0; color: #6b7280; font-size: 13px;">
+            <strong>✉️ Sender:</strong>
+          </td>
+          <td style="padding: 5px 0; text-align: right;">
+            <a href="mailto:{{from_email}}" style="color: #14b8a6; text-decoration: none; font-size: 13px;">{{from_email}}</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align: center; margin-top: 20px; padding: 20px; color: #9ca3af; font-size: 12px;">
+    <p style="margin: 0 0 10px 0;">This message was sent through your portfolio contact form</p>
+    <p style="margin: 0;">
+      <a href="mailto:marriyaswanth42@gmail.com" style="color: #14b8a6; text-decoration: none;">marriyaswanth42@gmail.com</a>
+    </p>
+  </div>
+
+</div>
+
+<!-- 
+TEMPLATE VARIABLES USED:
+- {{from_name}} - Sender's name
+- {{from_email}} - Sender's email address
+- {{subject}} - Email subject
+- {{message}} - Message content
+
+SETTINGS FOR EMAILJS:
+- To Email: marriyaswanth42@gmail.com
+- From Name: {{from_name}}
+- Subject: {{subject}} - New Message from {{from_name}}
+-->

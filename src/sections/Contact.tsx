@@ -12,6 +12,7 @@ const Contact: React.FC = () => {
   });
   
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState({
@@ -20,25 +21,67 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
     
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus('success');
-      setFormState({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
+    try {
+      // Using FormSubmit with AJAX endpoint
+      const formData = new FormData();
+      formData.append('name', formState.name);
+      formData.append('email', formState.email);
+      formData.append('subject', formState.subject);
+      formData.append('message', formState.message);
+      formData.append('_subject', `Portfolio Contact: ${formState.subject}`);
+      formData.append('_captcha', 'false');
+      formData.append('_template', 'table'); // Nice email template
       
-      // Reset status after 3 seconds
+      const response = await fetch('https://formsubmit.co/ajax/marriyaswanth42@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          subject: formState.subject,
+          message: formState.message,
+          _subject: `Portfolio Contact: ${formState.subject}`,
+          _captcha: 'false',
+          _template: 'table'
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setFormStatus('success');
+        setFormState({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+        
+        // Reset status after 5 seconds
+        setTimeout(() => {
+          setFormStatus('idle');
+        }, 5000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      setFormStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to send message');
+      
+      // Reset error status after 5 seconds
       setTimeout(() => {
         setFormStatus('idle');
-      }, 3000);
-    }, 1500);
+        setErrorMessage('');
+      }, 5000);
+    }
   };
 
   return (
@@ -83,9 +126,12 @@ const Contact: React.FC = () => {
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
                     Email
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <a 
+                    href="mailto:marriyaswanth42@gmail.com"
+                    className="text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
+                  >
                     marriyaswanth42@gmail.com
-                  </p>
+                  </a>
                 </div>
               </div>
 
@@ -201,13 +247,13 @@ const Contact: React.FC = () => {
                 
                 {formStatus === 'success' && (
                   <p className="mt-3 text-sm text-green-600 dark:text-green-400">
-                    Your message has been sent successfully!
+                    ✅ Your message has been sent successfully!
                   </p>
                 )}
                 
                 {formStatus === 'error' && (
                   <p className="mt-3 text-sm text-red-600 dark:text-red-400">
-                    There was an error sending your message. Please try again.
+                    ❌ {errorMessage || 'There was an error sending your message. Please try again.'}
                   </p>
                 )}
               </div>

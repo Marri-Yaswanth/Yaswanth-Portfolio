@@ -15,7 +15,7 @@ export const navLinks: NavLink[] = [
 export const socialLinks: SocialLink[] = [
   { name: 'GitHub', url: 'https://github.com/', icon: 'Github' },
   { name: 'LinkedIn', url: 'https://linkedin.com/in/', icon: 'Linkedin' },
-  { name: 'Email', url: 'mailto:your.email@example.com', icon: 'Mail' },
+  { name: 'Email', url: 'mailto:marriyaswanth42@gmail.com', icon: 'Mail' },
 ];
 
 // About Me data
@@ -30,7 +30,7 @@ When I'm not coding, you'll find me learning new tech stacks, brainstorming pers
 When I'm not coding, you can find me exploring the outdoors, reading about new technologies, or participating in hackathons to challenge myself and collaborate with other talented developers.`,
   photoUrl: '/portfolio-picture.jpeg',
   resumeLinks: {
-    general: '/cv/Yaswanth_updated_cv.pdf',
+    general: '/cv/general-resume.pdf',
     specialized: '/cv/specialized-resume.pdf'
   }
 };
