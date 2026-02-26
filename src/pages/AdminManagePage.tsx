@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Trash2, Pencil, FolderOpen, Award, Wrench, AlertTriangle, X, Check, Plus, Zap } from 'lucide-react';
+import { ArrowLeft, Trash2, Pencil, FolderOpen, Award, Wrench, AlertTriangle, X, Check, Plus, Zap, LogOut, User } from 'lucide-react';
+import ProfileSettings from '../components/ProfileSettings';
 import { usePortfolio } from '../context/PortfolioContext';
+import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
 import SectionHeading from '../components/SectionHeading';
 import { Project, Certification, Skill, ProjectStatus } from '../types';
 
-type Tab = 'projects' | 'certifications' | 'skills';
+type Tab = 'projects' | 'certifications' | 'skills' | 'profile';
 
 const SKILL_CATEGORIES: { id: string; label: string }[] = [
   { id: 'frontend', label: 'Frontend' },
@@ -23,6 +25,7 @@ const AdminManagePage: React.FC = () => {
     updateProject, updateCertification, updateSkill,
     addSkills,
   } = usePortfolio();
+  const { logout } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<Tab>('projects');
@@ -217,17 +220,26 @@ const AdminManagePage: React.FC = () => {
     { id: 'projects', label: 'Projects', icon: <FolderOpen size={16} />, count: projects.length },
     { id: 'certifications', label: 'Certifications', icon: <Award size={16} />, count: certifications.length },
     { id: 'skills', label: 'Skills', icon: <Wrench size={16} />, count: skills.length },
+    { id: 'profile', label: 'Profile', icon: <User size={16} />, count: 0 },
   ];
 
   return (
     <div className="pt-24 pb-16 min-h-screen bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 max-w-3xl">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-amber-500 dark:hover:text-amber-400 mb-6 transition-colors"
-        >
-          <ArrowLeft size={16} /> Back
-        </button>
+        <div className="flex items-center justify-between mb-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
+          >
+            <ArrowLeft size={16} /> Back
+          </button>
+          <button
+            onClick={() => { logout(); showToast('Logged out', 'success'); navigate('/'); }}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg text-red-500 border border-red-500/30 hover:bg-red-500/10 transition-colors"
+          >
+            <LogOut size={16} /> Logout
+          </button>
+        </div>
 
         <SectionHeading title="Admin Panel" subtitle="Manage your portfolio content" />
 
@@ -235,25 +247,25 @@ const AdminManagePage: React.FC = () => {
         <div className="flex flex-wrap gap-3 mb-8">
           <Link
             to="/projects/add"
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-500/5 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 dark:border-amber-500/30 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 transition-colors"
           >
             <Plus size={15} /> Project
           </Link>
           <Link
             to="/certifications/add"
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-500/5 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 dark:border-amber-500/30 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 transition-colors"
           >
             <Plus size={15} /> Certification
           </Link>
           <Link
             to="/skills/add"
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-500/5 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 dark:border-amber-500/30 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 transition-colors"
           >
             <Plus size={15} /> Skill
           </Link>
           <Link
             to="/resume/update"
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-amber-500/5 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 dark:border-amber-500/30 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 transition-colors"
           >
             <Plus size={15} /> Resume
           </Link>
@@ -273,9 +285,11 @@ const AdminManagePage: React.FC = () => {
             >
               {tab.icon}
               {tab.label}
-              <span className="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                {tab.count}
-              </span>
+              {tab.count > 0 && (
+                <span className="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                  {tab.count}
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -400,6 +414,9 @@ const AdminManagePage: React.FC = () => {
             ))}
           </div>
         )}
+
+        {/* Profile Settings */}
+        {activeTab === 'profile' && <ProfileSettings />}
       </div>
 
       {/* ========== EDIT PROJECT MODAL ========== */}
@@ -639,7 +656,7 @@ const AdminManagePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto p-6">
             <div className="flex items-center gap-3 mb-5">
-              <div className="p-2 rounded-full bg-amber-100 dark:bg-amber-500/20">
+              <div className="p-2 rounded-full bg-amber-500/10 dark:bg-amber-500/20">
                 <Zap size={22} className="text-amber-500" />
               </div>
               <div>

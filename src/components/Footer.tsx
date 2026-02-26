@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Hidden admin links */}
-        {/* <div className="mt-6 flex justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300">
+        <div className="mt-6 flex justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300">
           <Link
             to="/projects/add"
             className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
@@ -71,12 +71,12 @@ const Footer: React.FC = () => {
             + Resume
           </Link>
           <Link
-            to="/yashu"
+            to="/login"
             className="text-xs text-gray-400 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 transition-colors"
           >
             Manage
-          </Link> 
-        </div> */}
+          </Link>
+        </div>
       </div>
     </footer>
   );

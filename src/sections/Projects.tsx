@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { ExternalLink, Github, Circle, Loader, Lightbulb, X, Globe, KeyRound, Copy, Check, Eye, EyeOff } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { useToast } from '../components/Toast';
@@ -18,7 +19,7 @@ const statusConfig: Record<ProjectStatus, { label: string; color: string; badgeC
   },
   'in-progress': {
     label: 'In Progress',
-    color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400',
+    color: 'bg-amber-500/10 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400',
     badgeColor: 'bg-amber-500',
     icon: <Loader size={12} className="text-amber-500 animate-spin" />,
   },
@@ -220,7 +221,7 @@ const Projects: React.FC = () => {
             className={`px-4 py-1.5 rounded-full text-sm transition-colors ${
               filter === 'all'
                 ? 'bg-amber-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-amber-500/10 dark:hover:bg-gray-700'
             }`}
           >
             All
@@ -233,7 +234,7 @@ const Projects: React.FC = () => {
               className={`px-4 py-1.5 rounded-full text-sm transition-colors ${
                 filter === tech
                   ? 'bg-amber-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-amber-500/10 dark:hover:bg-gray-700'
               }`}
             >
               {tech}
@@ -302,9 +303,10 @@ const Projects: React.FC = () => {
         </div>
       </div>
 
-      {/* Project Detail Modal */}
-      {selectedProject && (
-        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      {/* Project Detail Modal (portalled to body to escape transform context) */}
+      {selectedProject && ReactDOM.createPortal(
+        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />,
+        document.body
       )}
 
       <SectionArrow to="/certifications" prev="/skills" label="Go to Certifications" prevLabel="Go to Skills" />

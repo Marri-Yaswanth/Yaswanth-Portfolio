@@ -8,6 +8,7 @@ interface AnimatedSectionProps {
   className?: string;
   delayMultiplier?: number;
   direction?: AnimationDirection;
+  onClick?: () => void;
 }
 
 const directionClass: Record<AnimationDirection, string> = {
@@ -21,7 +22,8 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   id, 
   className = '',
   delayMultiplier = 0,
-  direction = 'up'
+  direction = 'up',
+  onClick,
 }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -61,6 +63,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
       ref={sectionRef}
       id={id}
       className={`fade-in-section ${directionClass[direction]} ${className}`}
+      onClick={onClick}
     >
       {children}
     </section>

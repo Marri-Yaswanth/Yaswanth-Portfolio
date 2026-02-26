@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { FileText, Download, ExternalLink, X } from 'lucide-react';
 import { aboutMe } from '../data';
 import { usePortfolio } from '../context/PortfolioContext';
@@ -38,7 +39,7 @@ const About: React.FC = () => {
               </div>
               
               <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-gray-200 dark:bg-gray-800 rounded-lg -z-10"></div>
-              <div className="absolute -top-6 -left-6 w-64 h-64 bg-amber-100 dark:bg-amber-900 rounded-lg -z-10 opacity-50"></div>
+              <div className="absolute -top-6 -left-6 w-64 h-64 bg-amber-500/20 dark:bg-amber-500/10 rounded-lg -z-10"></div>
             </div>
           </div>
 
@@ -111,8 +112,8 @@ const About: React.FC = () => {
         </div>
       </div>
 
-      {/* PDF Viewer Modal */}
-      {activePdf && (
+      {/* PDF Viewer Modal (portalled to body to escape transform context) */}
+      {activePdf && ReactDOM.createPortal(
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl h-[80vh] flex flex-col">
             <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
@@ -132,7 +133,8 @@ const About: React.FC = () => {
               />
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       <SectionArrow to="/education" prev="/" label="Go to Education" prevLabel="Go to Home" />

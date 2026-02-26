@@ -6,13 +6,13 @@ import useTypewriter from '../hooks/useTypewriter';
 import * as LucideIcons from 'lucide-react';
 
 const particles = [
-  { cls: 'animate-particle-1', size: 'w-3 h-3', color: 'bg-amber-400/30', top: '15%', left: '10%', delay: '0s' },
+  { cls: 'animate-particle-1', size: 'w-3 h-3', color: 'bg-amber-500/30', top: '15%', left: '10%', delay: '0s' },
   { cls: 'animate-particle-2', size: 'w-2 h-2', color: 'bg-yellow-400/20', top: '25%', left: '80%', delay: '1s' },
-  { cls: 'animate-particle-3', size: 'w-4 h-4', color: 'bg-amber-300/20', top: '60%', left: '15%', delay: '2s' },
+  { cls: 'animate-particle-3', size: 'w-4 h-4', color: 'bg-amber-500/20', top: '60%', left: '15%', delay: '2s' },
   { cls: 'animate-particle-1', size: 'w-2 h-2', color: 'bg-blue-400/25', top: '70%', left: '75%', delay: '3s' },
   { cls: 'animate-particle-2', size: 'w-3 h-3', color: 'bg-amber-500/15', top: '40%', left: '50%', delay: '0.5s' },
   { cls: 'animate-particle-3', size: 'w-2 h-2', color: 'bg-yellow-300/20', top: '80%', left: '35%', delay: '1.5s' },
-  { cls: 'animate-particle-1', size: 'w-1.5 h-1.5', color: 'bg-amber-400/20', top: '10%', left: '60%', delay: '4s' },
+  { cls: 'animate-particle-1', size: 'w-1.5 h-1.5', color: 'bg-amber-500/20', top: '10%', left: '60%', delay: '4s' },
   { cls: 'animate-particle-2', size: 'w-2.5 h-2.5', color: 'bg-blue-300/15', top: '50%', left: '90%', delay: '2.5s' },
 ];
 
@@ -35,7 +35,7 @@ const Home: React.FC = () => {
     <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
       {/* Animated floating background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-10 -right-10 w-72 h-72 bg-amber-300 dark:bg-amber-800 rounded-full opacity-20 blur-3xl animate-float"></div>
+        <div className="absolute -top-10 -right-10 w-72 h-72 bg-amber-500/30 dark:bg-amber-500/20 rounded-full blur-3xl animate-float"></div>
         <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-blue-300 dark:bg-blue-800 rounded-full opacity-20 blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
         {/* Floating particles */}
         {particles.map((p, i) => (

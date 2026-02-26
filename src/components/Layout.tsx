@@ -29,7 +29,7 @@ const Layout: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <ScrollProgress />
       <CustomCursor />
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-100/20 via-transparent to-transparent dark:from-amber-900/20 pointer-events-none"></div>
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent dark:from-amber-500/5 pointer-events-none"></div>
       <Navbar />
       <main className="relative">
         <Outlet />

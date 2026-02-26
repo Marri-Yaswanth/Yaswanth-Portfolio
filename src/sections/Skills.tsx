@@ -57,8 +57,8 @@ const RadialProgress: React.FC<{ percent: number; size?: number; strokeWidth?: n
         />
         <defs>
           <linearGradient id="amberGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#415a77" />
-            <stop offset="100%" stopColor="#778da9" />
+            <stop offset="0%" style={{ stopColor: 'rgb(var(--accent-dark))' }} />
+            <stop offset="100%" style={{ stopColor: 'rgb(var(--accent-light))' }} />
           </linearGradient>
         </defs>
       </svg>
@@ -112,7 +112,7 @@ const Skills: React.FC = () => {
               className={`px-5 py-2 rounded-full transition-colors ${
                 activeCategory === category.id
                   ? 'bg-amber-500 text-white'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-600'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-amber-500/10 dark:hover:bg-gray-600'
               }`}
             >
               {category.label}

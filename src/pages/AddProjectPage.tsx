@@ -332,7 +332,7 @@ const AddProjectPage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto p-6">
             <div className="flex items-center gap-3 mb-5">
-              <div className="p-2 rounded-full bg-amber-100 dark:bg-amber-500/20">
+              <div className="p-2 rounded-full bg-amber-500/10 dark:bg-amber-500/20">
                 <Zap size={22} className="text-amber-500" />
               </div>
               <div>

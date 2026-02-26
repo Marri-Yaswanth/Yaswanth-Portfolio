@@ -13,7 +13,9 @@ import AddCertificationPage from './pages/AddCertificationPage';
 import AddSkillPage from './pages/AddSkillPage';
 import UpdateResumePage from './pages/UpdateResumePage';
 import AdminManagePage from './pages/AdminManagePage';
+import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ProtectedRoute from './components/ProtectedRoute';
 import './styles/animations.css';
 
 function App() {
@@ -30,7 +32,8 @@ function App() {
         <Route path="certifications" element={<CertificationsPage />} />
         <Route path="certifications/add" element={<AddCertificationPage />} />
         <Route path="resume/update" element={<UpdateResumePage />} />
-        <Route path="yashu" element={<AdminManagePage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="yashu" element={<ProtectedRoute><AdminManagePage /></ProtectedRoute>} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
