@@ -1,17 +1,27 @@
 import React, { useEffect, useRef, ReactNode } from 'react';
 
+type AnimationDirection = 'up' | 'left' | 'right';
+
 interface AnimatedSectionProps {
   children: ReactNode;
   id?: string;
   className?: string;
   delayMultiplier?: number;
+  direction?: AnimationDirection;
 }
+
+const directionClass: Record<AnimationDirection, string> = {
+  up: '',
+  left: 'stagger-left',
+  right: 'stagger-right',
+};
 
 const AnimatedSection: React.FC<AnimatedSectionProps> = ({ 
   children, 
   id, 
   className = '',
-  delayMultiplier = 0
+  delayMultiplier = 0,
+  direction = 'up'
 }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -50,7 +60,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
     <section
       ref={sectionRef}
       id={id}
-      className={`fade-in-section ${className}`}
+      className={`fade-in-section ${directionClass[direction]} ${className}`}
     >
       {children}
     </section>

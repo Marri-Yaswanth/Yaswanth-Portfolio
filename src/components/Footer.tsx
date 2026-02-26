@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { socialLinks } from '../data';
 import * as LucideIcons from 'lucide-react';
 
@@ -15,7 +16,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white">
-              Marri Venkata Siva Naga <span className="text-teal-500">Yaswanth</span>
+              Marri Venkata Siva Naga <span className="text-amber-500">Yaswanth</span>
             </h3>
             <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-md">
               Web Developer student passionate about creating innovative websites that make a difference.
@@ -30,7 +31,7 @@ const Footer: React.FC = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-teal-500 dark:text-gray-300 dark:hover:text-teal-400 transition-colors"
+                  className="text-gray-600 hover:text-amber-500 dark:text-gray-300 dark:hover:text-amber-400 transition-colors"
                   aria-label={link.name}
                 >
                   {IconComponent(link.icon)}
@@ -41,6 +42,34 @@ const Footer: React.FC = () => {
               © {new Date().getFullYear()} Marri Venkata Siva Naga Yaswanth. All rights reserved.
             </p>
           </div>
+        </div>
+
+        {/* Hidden admin links */}
+        <div className="mt-6 flex justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300">
+          <Link
+            to="/projects/add"
+            className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
+          >
+            + Project
+          </Link>
+          <Link
+            to="/certifications/add"
+            className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
+          >
+            + Certification
+          </Link>
+          <Link
+            to="/skills/add"
+            className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
+          >
+            + Skill
+          </Link>
+          <Link
+            to="/resume/update"
+            className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
+          >
+            + Resume
+          </Link>
         </div>
       </div>
     </footer>

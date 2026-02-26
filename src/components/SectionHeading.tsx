@@ -27,7 +27,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
           {subtitle}
         </p>
       )}
-      <div className={`h-1 w-20 bg-teal-500 mt-4 ${align === 'center' ? 'mx-auto' : align === 'right' ? 'ml-auto' : ''}`}></div>
+      <div className={`h-1 w-20 bg-amber-500 mt-4 ${align === 'center' ? 'mx-auto' : align === 'right' ? 'ml-auto' : ''}`}></div>
     </div>
   );
 };

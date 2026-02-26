@@ -2,6 +2,7 @@ import React from 'react';
 import Section from '../ui/Section';
 import { education } from '../data/education';
 import { GraduationCap, Calendar, MapPin } from 'lucide-react';
+import SectionArrow from '../components/SectionArrow';
 
 const Education: React.FC = () => {
   return (
@@ -45,6 +46,7 @@ const Education: React.FC = () => {
           ))}
         </div>
       </div>
+      <SectionArrow to="/skills" prev="/about" label="Go to Skills" prevLabel="Go to About" />
     </Section>
   );
 };

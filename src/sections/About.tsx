@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { FileText, Download, ExternalLink, X } from 'lucide-react';
 import { aboutMe } from '../data';
+import { usePortfolio } from '../context/PortfolioContext';
 import SectionHeading from '../components/SectionHeading';
+import SectionArrow from '../components/SectionArrow';
 import AnimatedSection from '../components/AnimatedSection';
 
 const About: React.FC = () => {
+  const { resumeLinks } = usePortfolio();
   const [activePdf, setActivePdf] = useState<string | null>(null);
 
   const handleViewPdf = (pdfPath: string) => {
@@ -35,7 +38,7 @@ const About: React.FC = () => {
               </div>
               
               <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-gray-200 dark:bg-gray-800 rounded-lg -z-10"></div>
-              <div className="absolute -top-6 -left-6 w-64 h-64 bg-teal-100 dark:bg-teal-900 rounded-lg -z-10 opacity-50"></div>
+              <div className="absolute -top-6 -left-6 w-64 h-64 bg-amber-100 dark:bg-amber-900 rounded-lg -z-10 opacity-50"></div>
             </div>
           </div>
 
@@ -52,7 +55,7 @@ const About: React.FC = () => {
             <div className="flex flex-col md:flex-row gap-6 mt-8">
               <div className="flex-1 p-6 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 transition-transform hover:shadow-md hover:translate-y-[-4px]">
                 <h4 className="font-bold text-gray-800 dark:text-white mb-3 flex items-center">
-                  <FileText className="mr-2 text-teal-500" size={20} />
+                  <FileText className="mr-2 text-amber-500" size={20} />
                   General Resume
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
@@ -60,16 +63,16 @@ const About: React.FC = () => {
                 </p>
                 <div className="flex space-x-4">
                   <button
-                    onClick={() => handleViewPdf(aboutMe.resumeLinks.general)}
-                    className="inline-flex items-center text-teal-500 hover:text-teal-600 dark:hover:text-teal-400"
+                    onClick={() => handleViewPdf(resumeLinks.general)}
+                    className="inline-flex items-center text-amber-500 hover:text-amber-600 dark:hover:text-amber-400"
                   >
                     <ExternalLink size={16} className="mr-1" />
                     <span>View PDF</span>
                   </button>
                   <a
-                    href={aboutMe.resumeLinks.general}
+                    href={resumeLinks.general}
                     download="general-resume.pdf"
-                    className="inline-flex items-center text-teal-500 hover:text-teal-600 dark:hover:text-teal-400"
+                    className="inline-flex items-center text-amber-500 hover:text-amber-600 dark:hover:text-amber-400"
                   >
                     <Download size={16} className="mr-1" />
                     <span>Download</span>
@@ -79,7 +82,7 @@ const About: React.FC = () => {
 
               <div className="flex-1 p-6 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 transition-transform hover:shadow-md hover:translate-y-[-4px]">
                 <h4 className="font-bold text-gray-800 dark:text-white mb-3 flex items-center">
-                  <FileText className="mr-2 text-teal-500" size={20} />
+                  <FileText className="mr-2 text-amber-500" size={20} />
                   Specialized Resume
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
@@ -87,16 +90,16 @@ const About: React.FC = () => {
                 </p>
                 <div className="flex space-x-4">
                   <button
-                    onClick={() => handleViewPdf(aboutMe.resumeLinks.specialized)}
-                    className="inline-flex items-center text-teal-500 hover:text-teal-600 dark:hover:text-teal-400"
+                    onClick={() => handleViewPdf(resumeLinks.specialized)}
+                    className="inline-flex items-center text-amber-500 hover:text-amber-600 dark:hover:text-amber-400"
                   >
                     <ExternalLink size={16} className="mr-1" />
                     <span>View PDF</span>
                   </button>
                   <a
-                    href={aboutMe.resumeLinks.specialized}
+                    href={resumeLinks.specialized}
                     download="specialized-resume.pdf"
-                    className="inline-flex items-center text-teal-500 hover:text-teal-600 dark:hover:text-teal-400"
+                    className="inline-flex items-center text-amber-500 hover:text-amber-600 dark:hover:text-amber-400"
                   >
                     <Download size={16} className="mr-1" />
                     <span>Download</span>
@@ -131,6 +134,8 @@ const About: React.FC = () => {
           </div>
         </div>
       )}
+
+      <SectionArrow to="/education" prev="/" label="Go to Education" prevLabel="Go to Home" />
     </AnimatedSection>
   );
 };

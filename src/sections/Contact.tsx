@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Send, Mail, MapPin, Phone } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import AnimatedSection from '../components/AnimatedSection';
+import SectionArrow from '../components/SectionArrow';
+import { useToast } from '../components/Toast';
 
 const Contact: React.FC = () => {
+  const { showToast } = useToast();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -57,6 +60,7 @@ const Contact: React.FC = () => {
       
       if (result.success) {
         setFormStatus('success');
+        showToast('Message sent successfully!');
         setFormState({
           name: '',
           email: '',
@@ -74,6 +78,7 @@ const Contact: React.FC = () => {
     } catch (error) {
       console.error('Failed to send email:', error);
       setFormStatus('error');
+      showToast(error instanceof Error ? error.message : 'Failed to send message', 'error');
       setErrorMessage(error instanceof Error ? error.message : 'Failed to send message');
       
       // Reset error status after 5 seconds
@@ -105,8 +110,8 @@ const Contact: React.FC = () => {
 
             <div className="space-y-6">
               <div className="flex items-start">
-                <div className="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="text-teal-500" size={20} />
+                <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="text-amber-500" size={20} />
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
@@ -119,8 +124,8 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900 flex items-center justify-center flex-shrink-0">
-                  <Mail className="text-teal-500" size={20} />
+                <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center flex-shrink-0">
+                  <Mail className="text-amber-500" size={20} />
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
@@ -128,7 +133,7 @@ const Contact: React.FC = () => {
                   </h4>
                   <a 
                     href="mailto:marriyaswanth42@gmail.com"
-                    className="text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
+                    className="text-gray-600 dark:text-gray-300 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
                   >
                     marriyaswanth42@gmail.com
                   </a>
@@ -136,8 +141,8 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900 flex items-center justify-center flex-shrink-0">
-                  <Phone className="text-teal-500" size={20} />
+                <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center flex-shrink-0">
+                  <Phone className="text-amber-500" size={20} />
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
@@ -165,7 +170,7 @@ const Contact: React.FC = () => {
                     value={formState.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-700 dark:text-gray-200"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-gray-700 dark:text-gray-200"
                     placeholder="name"
                   />
                 </div>
@@ -181,7 +186,7 @@ const Contact: React.FC = () => {
                     value={formState.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-700 dark:text-gray-200"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-gray-700 dark:text-gray-200"
                     placeholder="email"
                   />
                 </div>
@@ -198,7 +203,7 @@ const Contact: React.FC = () => {
                   value={formState.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-700 dark:text-gray-200"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-gray-700 dark:text-gray-200"
                   placeholder="Project Inquiry"
                 />
               </div>
@@ -214,7 +219,7 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   rows={5}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-700 dark:text-gray-200 resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 text-gray-700 dark:text-gray-200 resize-none"
                   placeholder="I'd like to talk about..."
                 ></textarea>
               </div>
@@ -226,7 +231,7 @@ const Contact: React.FC = () => {
                   className={`px-6 py-3 rounded-lg font-medium flex items-center justify-center transition-colors ${
                     formStatus === 'submitting'
                       ? 'bg-gray-400 text-white cursor-not-allowed'
-                      : 'bg-teal-500 hover:bg-teal-600 text-white'
+                      : 'bg-amber-500 hover:bg-amber-600 text-white'
                   }`}
                 >
                   {formStatus === 'submitting' ? (
@@ -261,6 +266,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
+      <SectionArrow to="/" prev="/certifications" label="Back to Home" prevLabel="Go to Certifications" />
     </AnimatedSection>
   );
 };

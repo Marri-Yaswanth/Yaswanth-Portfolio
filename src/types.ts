@@ -1,5 +1,12 @@
 // Define TypeScript types for the portfolio data
 
+export type ProjectStatus = 'live' | 'in-progress' | 'ideation';
+
+export interface ProjectCredential {
+  label: string;
+  value: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -8,6 +15,8 @@ export interface Project {
   image: string;
   link?: string;
   github?: string;
+  status: ProjectStatus;
+  credentials?: ProjectCredential[];
 }
 
 export interface Skill {

@@ -1,40 +1,36 @@
-import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './sections/Home';
-import About from './sections/About';
-import Education from './sections/Education';
-import Skills from './sections/Skills';
-import Projects from './sections/Projects';
-import Certifications from './sections/Certifications';
-import Contact from './sections/Contact';
-import { useTheme } from './hooks/useTheme';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import EducationPage from './pages/EducationPage';
+import SkillsPage from './pages/SkillsPage';
+import ProjectsPage from './pages/ProjectsPage';
+import CertificationsPage from './pages/CertificationsPage';
+import ContactPage from './pages/ContactPage';
+import AddProjectPage from './pages/AddProjectPage';
+import AddCertificationPage from './pages/AddCertificationPage';
+import AddSkillPage from './pages/AddSkillPage';
+import UpdateResumePage from './pages/UpdateResumePage';
 import './styles/animations.css';
 
 function App() {
-  useTheme(); // Initialize theme
-
-  useEffect(() => {
-    document.title = 'Marri Venkata Siva Naga Yaswanth | Building Digital Solutions';
-  }, []);
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-100/20 via-transparent to-transparent dark:from-teal-900/20 pointer-events-none"></div>
-      <Navbar />
-      
-      <main className="relative">
-        <Home />
-        <About />
-        <Education />
-        <Skills />
-        <Projects />
-        <Certifications />
-        <Contact />
-      </main>
-      
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="education" element={<EducationPage />} />
+        <Route path="skills" element={<SkillsPage />} />
+        <Route path="skills/add" element={<AddSkillPage />} />
+        <Route path="projects" element={<ProjectsPage />} />
+        <Route path="projects/add" element={<AddProjectPage />} />
+        <Route path="certifications" element={<CertificationsPage />} />
+        <Route path="certifications/add" element={<AddCertificationPage />} />
+        <Route path="resume/update" element={<UpdateResumePage />} />
+        <Route path="contact" element={<ContactPage />} />
+      </Route>
+    </Routes>
   );
 }
 

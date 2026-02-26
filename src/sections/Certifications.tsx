@@ -1,10 +1,12 @@
 import React from 'react';
 import { Award, Calendar, Link as LinkIcon, FileText } from 'lucide-react';
-import { certifications } from '../data';
+import { usePortfolio } from '../context/PortfolioContext';
 import SectionHeading from '../components/SectionHeading';
 import AnimatedSection from '../components/AnimatedSection';
+import SectionArrow from '../components/SectionArrow';
 
 const Certifications: React.FC = () => {
+  const { certifications } = usePortfolio();
   // Helper function to format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -28,17 +30,21 @@ const Certifications: React.FC = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {certifications.map((cert, index) => (
+          {certifications.map((cert, index) => {
+            const directions: Array<'up' | 'left' | 'right'> = ['left', 'right'];
+            const dir = directions[index % 2];
+            return (
             <AnimatedSection
               key={cert.id}
-              className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row hover:shadow-lg transition-shadow"
+              className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row hover:shadow-lg transition-shadow card-glow"
               delayMultiplier={index}
+              direction={dir}
             >
               {cert.image && (
                 <div className="md:w-1/3 h-48 md:h-auto flex items-center justify-center bg-gray-100 dark:bg-gray-600">
                   {isPdf(cert.image) ? (
                     <div className="flex flex-col items-center justify-center p-4 text-center">
-                      <FileText size={48} className="text-teal-500 mb-2" />
+                      <FileText size={48} className="text-amber-500 mb-2" />
                       <span className="text-sm text-gray-600 dark:text-gray-300">PDF Certificate</span>
                     </div>
                   ) : (
@@ -57,7 +63,7 @@ const Certifications: React.FC = () => {
                     <h3 className="text-xl font-bold text-gray-800 dark:text-white">
                       {cert.name}
                     </h3>
-                    <Award className="text-teal-500 flex-shrink-0 ml-2" size={20} />
+                    <Award className="text-amber-500 flex-shrink-0 ml-2" size={20} />
                   </div>
                   
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -75,7 +81,7 @@ const Certifications: React.FC = () => {
                     href={cert.credentialLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-teal-500 hover:text-teal-600 dark:hover:text-teal-400 text-sm font-medium"
+                    className="inline-flex items-center text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 text-sm font-medium"
                   >
                     <LinkIcon size={16} className="mr-1" />
                     <span>View Certificate</span>
@@ -83,9 +89,12 @@ const Certifications: React.FC = () => {
                 )}
               </div>
             </AnimatedSection>
-          ))}
+            );
+          })}
         </div>
       </div>
+
+      <SectionArrow to="/contact" prev="/projects" label="Go to Contact" prevLabel="Go to Projects" />
     </AnimatedSection>
   );
 };

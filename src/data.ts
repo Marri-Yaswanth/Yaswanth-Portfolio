@@ -2,13 +2,13 @@ import { Project, Skill, Certification, SocialLink, NavLink } from './types';
 
 // Navigation links
 export const navLinks: NavLink[] = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Education', href: '#education' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Education', href: '/education' },
+  { name: 'Skills', href: '/skills' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Certifications', href: '/certifications' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 // Social Links - update these with your actual links
@@ -70,7 +70,12 @@ export const projects: Project[] = [
     technologies: ['React', 'Node.js', 'PHP'],
     image: '/projects/recipe-react/recipe-react.png',
     github: 'https://github.com/Yaswanth-Marri/recipe-react',
-    // link: 'https://project1-demo.example.com'
+    status: 'live',
+    // link: 'https://project1-demo.example.com',
+    credentials: [
+      { label: 'Demo Username', value: 'demo@example.com' },
+      { label: 'Demo Password', value: 'demo123' },
+    ],
   },
   {
     id: 'project2',
@@ -78,7 +83,12 @@ export const projects: Project[] = [
     description: 'A responsive Frontend Online Courses Platform built with modern web technologies, enabling users to browse, enroll, and interact with a wide range of courses seamlessly.',
     technologies: ['Angular','Node.js'],
     image: '/projects/online courses project/online courses project.png',
-    github: 'https://github.com/Yaswanth-Marri/Online-Courses-Project'
+    github: 'https://github.com/Yaswanth-Marri/Online-Courses-Project',
+    status: 'in-progress',
+    credentials: [
+      { label: 'Demo Username', value: 'guest@courses.com' },
+      { label: 'Demo Password', value: 'guest123' },
+    ],
   },
   {
     id: 'project3',
@@ -87,7 +97,12 @@ export const projects: Project[] = [
     technologies: ['PHP','MySQL'],
     image: '/projects/recipe-share/recipeshare.png',
     github: 'https://github.com/Yaswanth-Marri/recipe-share',
-    // link: 'https://project3-demo.example.com'
+    status: 'ideation',
+    // link: 'https://project3-demo.example.com',
+    credentials: [
+      { label: 'Admin Username', value: 'admin' },
+      { label: 'Admin Password', value: 'admin123' },
+    ],
   },
   // {
   //   id: 'project4',

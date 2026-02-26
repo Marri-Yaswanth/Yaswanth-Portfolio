@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Track mouse position for card glow effect */
+@layer utilities {
+  .card-glow {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+  }
+}
+
+/* Hide default cursor on non-touch for custom cursor */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
