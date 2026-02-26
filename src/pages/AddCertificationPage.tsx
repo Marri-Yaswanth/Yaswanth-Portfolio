@@ -18,8 +18,10 @@ const AddCertificationPage: React.FC = () => {
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
+  const [imageBase64, setImageBase64] = useState<string>('');
   const [credFile, setCredFile] = useState<File | null>(null);
   const [credPreview, setCredPreview] = useState<string>('');
+  const [credBase64, setCredBase64] = useState<string>('');
 
   const [form, setForm] = useState({
     name: '',
@@ -27,50 +29,75 @@ const AddCertificationPage: React.FC = () => {
     date: '',
   });
 
+  // Convert a file to base64 data URL
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setImageFile(file);
     setImagePreview(URL.createObjectURL(file));
+    const base64 = await fileToBase64(file);
+    setImageBase64(base64);
   };
 
   const clearImage = () => {
     setImageFile(null);
     setImagePreview('');
+    setImageBase64('');
   };
 
-  const handleCredUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCredUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setCredFile(file);
     setCredPreview(URL.createObjectURL(file));
+    const base64 = await fileToBase64(file);
+    setCredBase64(base64);
   };
 
   const clearCred = () => {
     setCredFile(null);
     setCredPreview('');
+    setCredBase64('');
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!form.name || !form.issuer || !form.date) {
+      showToast('Please fill in all required fields', 'error');
+      return;
+    }
 
     const newCert = {
       id: `cert-${Date.now()}`,
       name: form.name,
       issuer: form.issuer,
       date: form.date,
-      credentialLink: credPreview || undefined,
-      image: imagePreview || undefined,
+      credentialLink: credBase64 || undefined,
+      image: imageBase64 || undefined,
     };
 
-    addCertification(newCert);
-    showToast('Certification added successfully!');
-    setSubmitted(true);
-    setTimeout(() => navigate('/certifications'), 1500);
+    try {
+      addCertification(newCert);
+      showToast('Certification added successfully!', 'success');
+      setSubmitted(true);
+      setTimeout(() => navigate('/certifications'), 1500);
+    } catch (err) {
+      showToast('Error adding certification. File may be too large for storage.', 'error');
+    }
   };
 
   const inputClass =
@@ -118,17 +145,17 @@ const AddCertificationPage: React.FC = () => {
             <input id="date" name="date" type="date" value={form.date} onChange={handleChange} required className={inputClass} />
           </div>
 
-          {/* Credential PDF Upload */}
+          {/* Credential Upload (PDF or Image) */}
           <div>
-            <label className={labelClass}>Credential PDF</label>
+            <label className={labelClass}>Credential (PDF or Image)</label>
             <label className={`${inputClass} cursor-pointer flex items-center gap-3 hover:border-amber-500 transition-colors`}>
               <Upload size={18} className="text-amber-500 flex-shrink-0" />
               <span className="truncate text-gray-500 dark:text-gray-400">
-                {credFile ? credFile.name : 'Choose PDF file...'}
+                {credFile ? credFile.name : 'Choose PDF or image file...'}
               </span>
               <input
                 type="file"
-                accept=".pdf"
+                accept=".pdf,image/*"
                 onChange={handleCredUpload}
                 className="hidden"
               />
@@ -139,6 +166,9 @@ const AddCertificationPage: React.FC = () => {
                   <FileText size={16} className="text-amber-500 flex-shrink-0" />
                   <span className="text-sm text-gray-600 dark:text-gray-300 truncate">{credFile?.name}</span>
                 </div>
+                {credFile && credFile.type.startsWith('image/') && (
+                  <img src={credPreview} alt="Credential preview" className="h-10 w-10 rounded border object-cover" />
+                )}
                 <a
                   href={credPreview}
                   target="_blank"

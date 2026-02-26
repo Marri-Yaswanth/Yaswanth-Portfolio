@@ -22,7 +22,7 @@ export interface Project {
 export interface Skill {
   name: string;
   proficiency: number; // 0-100
-  category: 'frontend' | 'backend' | 'tools' | 'languages' | 'other';
+  category: string; // 'frontend' | 'backend' | 'tools' | 'languages' or any custom category
   icon?: string; // Optional icon name from Lucide
 }
 

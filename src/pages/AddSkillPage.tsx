@@ -6,12 +6,12 @@ import { useToast } from '../components/Toast';
 import SectionHeading from '../components/SectionHeading';
 import { Skill } from '../types';
 
-const categoryOptions: { value: Skill['category']; label: string }[] = [
+const categoryOptions: { value: string; label: string }[] = [
   { value: 'frontend', label: 'Frontend' },
   { value: 'backend', label: 'Backend' },
   { value: 'languages', label: 'Languages' },
   { value: 'tools', label: 'Tools' },
-  { value: 'other', label: 'Other' },
+  { value: 'other', label: 'Other (custom)' },
 ];
 
 const AddSkillPage: React.FC = () => {
@@ -28,8 +28,9 @@ const AddSkillPage: React.FC = () => {
   const [form, setForm] = useState({
     name: '',
     proficiency: 50,
-    category: 'frontend' as Skill['category'],
+    category: 'frontend' as string,
     icon: '',
+    customCategory: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -48,10 +49,14 @@ const AddSkillPage: React.FC = () => {
       return;
     }
 
+    const resolvedCategory = form.category === 'other' && form.customCategory.trim()
+      ? form.customCategory.trim().toLowerCase()
+      : form.category;
+
     const newSkill: Skill = {
       name: form.name.trim(),
       proficiency: form.proficiency,
-      category: form.category,
+      category: resolvedCategory,
       ...(form.icon.trim() ? { icon: form.icon.trim() } : {}),
     };
 
@@ -69,7 +74,7 @@ const AddSkillPage: React.FC = () => {
           <p className="text-gray-600 dark:text-gray-300 mb-6">Your new skill has been added to the portfolio.</p>
           <div className="flex gap-4 justify-center">
             <button
-              onClick={() => { setSubmitted(false); setForm({ name: '', proficiency: 50, category: 'frontend', icon: '' }); }}
+              onClick={() => { setSubmitted(false); setForm({ name: '', proficiency: 50, category: 'frontend', icon: '', customCategory: '' }); }}
               className="px-6 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
             >
               Add Another
@@ -132,6 +137,23 @@ const AddSkillPage: React.FC = () => {
                 </option>
               ))}
             </select>
+            {form.category === 'other' && (
+              <div className="mt-3">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Custom Category Name *
+                </label>
+                <input
+                  type="text"
+                  name="customCategory"
+                  value={form.customCategory}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g. SQL, Database, Cloud"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                />
+                <p className="text-xs text-gray-400 mt-1">This will appear as a new category tab on the Skills page</p>
+              </div>
+            )}
           </div>
 
           {/* Proficiency */}

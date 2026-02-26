@@ -39,13 +39,13 @@ html {
 /* Button hover pulse effect */
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 0 0 rgba(65, 90, 119, 0.5);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+    box-shadow: 0 0 0 10px rgba(65, 90, 119, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    box-shadow: 0 0 0 0 rgba(65, 90, 119, 0);
   }
 }
 
@@ -64,7 +64,7 @@ html {
 
 /* Gradient text animation */
 .gradient-text {
-  background: linear-gradient(90deg, #f59e0b, #facc15);
+  background: linear-gradient(90deg, #415a77, #778da9);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -91,7 +91,7 @@ html {
 
 /* Make focus outlines consistent and accessible */
 *:focus-visible {
-  outline: 2px solid #f59e0b;
+  outline: 2px solid #415a77;
   outline-offset: 2px;
 }
 
@@ -209,7 +209,7 @@ a, button {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.08), transparent 40%);
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(65, 90, 119, 0.08), transparent 40%);
   border-radius: inherit;
   pointer-events: none;
   z-index: 1;
@@ -229,7 +229,7 @@ a, button {
   display: inline-block;
   width: 3px;
   height: 1em;
-  background-color: #f59e0b;
+  background-color: #415a77;
   margin-left: 2px;
   animation: blink 0.8s step-end infinite;
   vertical-align: text-bottom;

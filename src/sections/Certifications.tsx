@@ -18,7 +18,12 @@ const Certifications: React.FC = () => {
 
   // Helper function to check if the file is a PDF
   const isPdf = (filePath: string) => {
-    return filePath.toLowerCase().endsWith('.pdf');
+    return filePath.toLowerCase().endsWith('.pdf') || filePath.startsWith('data:application/pdf');
+  };
+
+  // Helper function to check if a string is an image
+  const isImage = (filePath: string) => {
+    return filePath.startsWith('data:image/') || /\.(png|jpe?g|gif|webp|svg|bmp)$/i.test(filePath);
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Github, Circle, Loader, Lightbulb, X, Globe, KeyRound, Copy, Check } from 'lucide-react';
+import { ExternalLink, Github, Circle, Loader, Lightbulb, X, Globe, KeyRound, Copy, Check, Eye, EyeOff } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { useToast } from '../components/Toast';
 import { Project, ProjectStatus } from '../types';
@@ -34,7 +34,17 @@ const statusConfig: Record<ProjectStatus, { label: string; color: string; badgeC
 const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => {
   const status = statusConfig[project.status];
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [visibleCreds, setVisibleCreds] = useState<Set<number>>(new Set());
   const { showToast } = useToast();
+
+  const toggleCredVisibility = (index: number) => {
+    setVisibleCreds((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  };
 
   // Close on Escape key
   useEffect(() => {
@@ -148,17 +158,28 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
               <div className="space-y-2">
                 {project.credentials.map((cred, i) => (
                   <div key={i} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-md px-3 py-2">
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <span className="text-xs text-gray-500 dark:text-gray-400">{cred.label}</span>
-                      <p className="text-sm font-mono text-gray-800 dark:text-gray-200">{cred.value}</p>
+                      <p className="text-sm font-mono text-gray-800 dark:text-gray-200">
+                        {visibleCreds.has(i) ? cred.value : '••••••••'}
+                      </p>
                     </div>
-                    <button
-                      onClick={() => handleCopy(cred.value, i)}
-                      className="ml-3 p-1.5 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 transition-colors"
-                      title="Copy"
-                    >
-                      {copiedIndex === i ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
-                    </button>
+                    <div className="flex items-center gap-1 ml-2 flex-shrink-0">
+                      <button
+                        onClick={() => toggleCredVisibility(i)}
+                        className="p-1.5 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 transition-colors"
+                        title={visibleCreds.has(i) ? 'Hide' : 'Show'}
+                      >
+                        {visibleCreds.has(i) ? <EyeOff size={14} /> : <Eye size={14} />}
+                      </button>
+                      <button
+                        onClick={() => handleCopy(cred.value, i)}
+                        className="p-1.5 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 transition-colors"
+                        title="Copy"
+                      >
+                        {copiedIndex === i ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

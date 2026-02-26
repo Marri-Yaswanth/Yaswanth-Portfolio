@@ -59,6 +59,11 @@ export const skills: Skill[] = [
   { name: 'Python', proficiency: 80, category: 'languages', icon: 'FileCode' },
   { name: 'Java', proficiency: 75, category: 'languages', icon: 'FileCode' },
   { name: 'C++', proficiency: 60, category: 'languages', icon: 'FileCode' },
+  { name: 'PHP', proficiency: 70, category: 'languages', icon: 'FileCode' },
+
+  // Other (from projects)
+  { name: 'Angular', proficiency: 70, category: 'frontend', icon: 'Code' },
+  { name: 'MySQL', proficiency: 72, category: 'backend', icon: 'Database' },
 ];
 
 // Projects data

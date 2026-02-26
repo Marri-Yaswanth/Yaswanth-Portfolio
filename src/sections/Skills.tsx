@@ -5,13 +5,14 @@ import AnimatedSection from '../components/AnimatedSection';
 import SectionArrow from '../components/SectionArrow';
 import * as LucideIcons from 'lucide-react';
 
-type SkillCategory = 'all' | 'frontend' | 'backend' | 'tools' | 'languages' | 'other';
+// Built-in categories in display order; custom ones are appended dynamically
+const BASE_CATEGORIES = ['frontend', 'backend', 'languages', 'tools'];
 
 // Radial progress ring component
 const RadialProgress: React.FC<{ percent: number; size?: number; strokeWidth?: number }> = ({
   percent,
-  size = 80,
-  strokeWidth = 6,
+  size = 56,
+  strokeWidth = 5,
 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -56,13 +57,13 @@ const RadialProgress: React.FC<{ percent: number; size?: number; strokeWidth?: n
         />
         <defs>
           <linearGradient id="amberGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#facc15" />
+            <stop offset="0%" stopColor="#415a77" />
+            <stop offset="100%" stopColor="#778da9" />
           </linearGradient>
         </defs>
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-sm font-bold text-gray-700 dark:text-gray-200">{percent}%</span>
+        <span className="text-xs font-bold text-gray-700 dark:text-gray-200">{percent}%</span>
       </div>
     </div>
   );
@@ -70,7 +71,7 @@ const RadialProgress: React.FC<{ percent: number; size?: number; strokeWidth?: n
 
 const Skills: React.FC = () => {
   const { skills } = usePortfolio();
-  const [activeCategory, setActiveCategory] = useState<SkillCategory>('all');
+  const [activeCategory, setActiveCategory] = useState<string>('all');
 
   // Dynamically get Lucide icons
   const IconComponent = (iconName: string | undefined) => {
@@ -79,17 +80,21 @@ const Skills: React.FC = () => {
     return Icon ? <Icon size={20} className="mr-2" /> : null;
   };
 
-  const categories: { id: SkillCategory; label: string }[] = [
+  // Build category tabs dynamically: base ones first, then any custom ones from skills data
+  const customCats = Array.from(new Set(
+    skills
+      .map((s) => s.category)
+      .filter((c) => !BASE_CATEGORIES.includes(c) && c !== 'other')
+  ));
+  const categories: { id: string; label: string }[] = [
     { id: 'all', label: 'All Skills' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'languages', label: 'Languages' },
-    { id: 'tools', label: 'Tools' },
+    ...BASE_CATEGORIES.map((c) => ({ id: c, label: c.charAt(0).toUpperCase() + c.slice(1) })),
+    ...customCats.map((c) => ({ id: c, label: c.charAt(0).toUpperCase() + c.slice(1) })),
   ];
 
-  const filteredSkills = activeCategory === 'all' 
-    ? skills 
-    : skills.filter(skill => skill.category === activeCategory);
+  const filteredSkills = activeCategory === 'all'
+    ? skills
+    : skills.filter((skill) => skill.category === activeCategory);
 
   return (
     <AnimatedSection id="skills" className="py-20 bg-gray-50 dark:bg-gray-800">
@@ -115,29 +120,29 @@ const Skills: React.FC = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           {filteredSkills.map((skill, index) => {
             const directions: Array<'up' | 'left' | 'right'> = ['left', 'up', 'right'];
             const dir = directions[index % 3];
             return (
               <AnimatedSection
                 key={skill.name}
-                className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow p-6 card-glow"
+                className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow p-3 card-glow"
                 delayMultiplier={index}
                 direction={dir}
               >
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col items-center gap-2 text-center">
                   <RadialProgress percent={skill.proficiency} />
-                  <div className="flex-1">
-                    <div className="flex items-center mb-1">
-                      <div className="text-amber-500 mr-2">
+                  <div>
+                    <div className="flex items-center justify-center gap-1">
+                      <div className="text-amber-500">
                         {IconComponent(skill.icon)}
                       </div>
-                      <h3 className="font-bold text-lg text-gray-800 dark:text-white">
+                      <h3 className="font-semibold text-sm text-gray-800 dark:text-white">
                         {skill.name}
                       </h3>
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{skill.category}</p>
+                    <p className="text-[10px] text-gray-500 dark:text-gray-400 capitalize mt-0.5">{skill.category}</p>
                   </div>
                 </div>
               </AnimatedSection>
