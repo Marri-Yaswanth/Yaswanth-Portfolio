@@ -35,12 +35,12 @@ const CertificateModal: React.FC<{ cert: Certification; onClose: () => void; isP
         onClick={(e) => e.stopPropagation()}
       >
         {/* Title bar — same style as resume viewer */}
-        <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
-          <div>
-            <h3 className="text-lg font-bold text-gray-800 dark:text-white">{cert.name}</h3>
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="min-w-0">
+            <h3 className="text-base sm:text-lg font-bold text-gray-800 dark:text-white truncate">{cert.name}</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400">Issued by {cert.issuer}</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             {cert.credentialLink && (
               <a
                 href={cert.credentialLink}

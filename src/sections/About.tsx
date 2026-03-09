@@ -29,8 +29,8 @@ const About: React.FC = () => {
 
         <div className="flex flex-col lg:flex-row items-center gap-10">
           <div className="lg:w-5/12 relative">
-            <div className="relative max-w-md mx-auto">
-              <div className="w-full h-96 rounded-lg overflow-hidden shadow-xl transform transition-transform hover:scale-105">
+            <div className="relative max-w-md mx-auto overflow-hidden">
+              <div className="w-full h-64 md:h-80 lg:h-96 rounded-lg overflow-hidden shadow-xl transform transition-transform hover:scale-105">
                 <img
                   src={aboutMe.photoUrl}
                   alt={aboutMe.name}
@@ -38,8 +38,8 @@ const About: React.FC = () => {
                 />
               </div>
               
-              <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-gray-200 dark:bg-gray-800 rounded-lg -z-10"></div>
-              <div className="absolute -top-6 -left-6 w-64 h-64 bg-amber-500/20 dark:bg-amber-500/10 rounded-lg -z-10"></div>
+              <div className="hidden md:block absolute -bottom-6 -right-6 w-64 h-64 bg-gray-200 dark:bg-gray-800 rounded-lg -z-10"></div>
+              <div className="hidden md:block absolute -top-6 -left-6 w-64 h-64 bg-amber-500/20 dark:bg-amber-500/10 rounded-lg -z-10"></div>
             </div>
           </div>
 

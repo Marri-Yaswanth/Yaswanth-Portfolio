@@ -17,12 +17,12 @@ const Education: React.FC = () => {
           <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
           
           {education.map((edu, index) => (
-            <div key={index} className="relative mb-12 pl-12">
+            <div key={index} className="relative mb-12 pl-10 md:pl-12">
               <div className="absolute left-0 top-0 w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
                 <GraduationCap className="w-4 h-4 text-primary-600 dark:text-primary-400" />
               </div>
               
-              <div className="card p-6 hover:translate-y-(-2px)">
+              <div className="card p-4 sm:p-6 hover:-translate-y-0.5 transition-transform">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 md:mb-0">
                     {edu.degree}

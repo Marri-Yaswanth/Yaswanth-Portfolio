@@ -44,37 +44,13 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Hidden admin links */}
-        <div className="mt-6 flex justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300">
+        {/* Hidden admin link */}
+        <div className="mt-6 flex justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
           <Link
-            to="/projects/add"
+            to="/yashu"
             className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
           >
-            + Project
-          </Link>
-          <Link
-            to="/certifications/add"
-            className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
-          >
-            + Certification
-          </Link>
-          <Link
-            to="/skills/add"
-            className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
-          >
-            + Skill
-          </Link>
-          <Link
-            to="/resume/update"
-            className="text-xs text-gray-400 dark:text-gray-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
-          >
-            + Resume
-          </Link>
-          <Link
-            to="/login"
-            className="text-xs text-gray-400 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 transition-colors"
-          >
-            Manage
+            Admin
           </Link>
         </div>
       </div>

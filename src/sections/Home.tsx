@@ -47,13 +47,13 @@ const Home: React.FC = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 py-32 z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-20 md:py-32 z-10">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-800 dark:text-white leading-tight">
               Hi, I'm <span className="text-amber-500">{aboutMe.name}</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed h-[2em]">
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed min-h-[2em]">
               {typedTitle}
               {!titleDone && <span className="typewriter-cursor" />}
             </p>
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-amber-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg transform rotate-12 animate-float">
+            <div className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-16 h-16 md:w-24 md:h-24 bg-amber-500 rounded-full flex items-center justify-center text-white text-lg md:text-2xl font-bold shadow-lg transform rotate-12 animate-float">
               <span>👋</span>
             </div>
           </div>
